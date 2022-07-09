@@ -1,0 +1,1 @@
+# nvim-pane-status-center
