@@ -12,11 +12,12 @@ set -g pane-border-format '#(pane_status_center #{pane_index})'
 
 ## Customisation
 
-Change the left and right characters:
+Change the left, right and padding characters:
 
 ```bash
 set -g @padd_surround_l "|"
 set -g @padd_surround_r "|"
+set -g @padd_char "~"
 ```
 
 ## Installation with [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) (recommended)
