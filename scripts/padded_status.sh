@@ -19,21 +19,35 @@ get_settings() {
 }
 
 get_padded() {
-    local w=$1
-    local ind=$2
+    local width=$1
+    local title=$2
     local str=''
-    local digits=$(echo -n $ind | wc -m | tr -d ' ')
-    local line_amount=$((w - 2 - digits))
-    local text_len=$((digits + 2))
-    local start=$((line_amount / 2))
+
+    # titile without newlines
+    # count the amount of characters
+    # delete space characters
+    local title_len=$(echo -n $title | wc -m | tr -d ' ')
+
+    # length of title with surrounding characters
+    local text_len=$((title_len + 2))
+
+    # amount of line characters
+    local line_amount=$((width - text_len))
+
+    # width / 2 = center
+    # text_len / 2 = start text position
+    # - 2 = tmux already has 2 characters for padding
+    local start=$((width / 2 - text_len / 2 - 2))
+
     for i in $(seq 0 $line_amount) ; do
         if [[ $i = $start ]] ; then
             str+="$surround_l"
-            str+="$ind"
+            str+="$title"
             str+="$surround_r"
         fi
         str+="$pad_char"
     done
+
     echo $str
 }
 
